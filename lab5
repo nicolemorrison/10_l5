@@ -1,0 +1,85 @@
+/*
+ * Author: Nicole Morrison
+ * Date: 3/4/2023
+ * 
+ * Program Name: nmorrison_lab5
+ * Program Description: Collatz Conjecture
+
+/* using Directives*/
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Authentication;
+using System.Text;
+using System.Threading.Tasks;
+
+//Define project Namespace
+namespace STCLab5
+
+{
+    class Lab5
+    {
+        //Program execution begins here
+        static void Main(string[] args)
+        {
+            //Creat a variable for the repeat loop
+            char repeat = 'Y';
+
+            //Start loop for conjecture
+            while (repeat != 'N')
+            {
+                //Ask for number
+                Console.WriteLine("Type a Whole Number between 2 and 1000 and press Enter: ");
+                //Because my accountant mother said some people might not know what a whole number is and it gave error when she purposely put in 4.5
+                double entered = Convert.ToDouble(Console.ReadLine());
+                //Convert to integer, this will also round any decimal my mother puts in to bother me
+                int seed = Convert.ToInt32(entered);
+                
+                //Check for value being between 2 and 1000
+                while (seed <=1 || seed >1000)
+                {
+                    Console.WriteLine("Must be a Whole Number between 2 and 1000: ");
+                    entered = Convert.ToDouble(Console.ReadLine());
+                    seed = Convert.ToInt32(entered);
+
+                }
+
+                //Run conjecture  calculations
+                int n = seed;
+                //counter to track number of cycles
+                int count = 0;
+                while (n != 1)
+                    if (n % 2 == 0)
+                    {
+                        n = n / 2;
+                        count++;
+                        Console.WriteLine("This cycle {0} is even so divide by 2 for result of {1} on cycle {2}", seed, n, count);
+                        seed = n;
+
+                    }
+                    else
+                    {
+                        n = (3 * n) + 1;
+                        count++;
+                        Console.WriteLine("This cycle {0} is odd so multiply by 3 and add 1 for result of {1} on cycle {2}", seed, n, count);
+                        seed = n;
+                        //Console.WriteLine("It took {0} cycles to get to 1", n);
+                    }
+
+                count = 0;
+                //Ask if desire to repeat
+                Console.WriteLine();
+                Console.WriteLine("Do you want to run Collatz Conjecture again? Press N and Enter to exit Y or any other key and Enter to repeat: ");
+                //Convert input to from string to character then to upper case
+                repeat = Char.ToUpper(Convert.ToChar(Console.ReadLine()));
+                //enter line so next statement is more visible
+                Console.WriteLine();
+            }
+
+
+
+
+            
+        }
+    }
+}
